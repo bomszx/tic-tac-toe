@@ -10,6 +10,7 @@ const Gameboard = (() => {
         const board = document.getElementById('board');
         const cellElements = document.querySelectorAll('[data-cell]')
         const winningMessageTextElement = document.getElementById('winningMessage')
+        const restartButton = document.getElementById('restartButton')
 
         let circleTurn
         const WINNING_COMB = [
@@ -73,12 +74,18 @@ const Gameboard = (() => {
         const startGame = () => {
             circleTurn = false;
             cellElements.forEach(cell => {
+                cell.classList.remove(X_CLASS)
+                cell.classList.remove(C_CLASS)
+                cell.removeEventListener('click', handleClick)
                 cell.addEventListener('click', handleClick, {once: true})
             })
             setBoardHoverClass()
+            winningMessageTextElement.classList.remove('show')
         }
 
         startGame();
+
+        restartButton.addEventListener('click', startGame)
 
         const placeMark = (cell, currentClass) => {
             cell.classList.add(currentClass)
