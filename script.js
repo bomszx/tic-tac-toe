@@ -77,9 +77,13 @@ const Gameboard = (() => {
         const startGame = () => {
             circleTurn = false;
             cellElements.forEach(cell => {
+                cell.classList.remove(X_CLASS)
+                cell.classList.remove(C_CLASS)
+                cell.removeEventListener('click', handleClick)
                 cell.addEventListener('click', handleClick, {once: true})
             })
             setBoardHoverClass()
+            winningMessageElement.classList.remove('show')
         }
 
         restartButton.addEventListener('click', function(e) {
@@ -87,6 +91,8 @@ const Gameboard = (() => {
         })
 
         startGame();
+
+        restartButton.addEventListener('click', startGame)
 
         const placeMark = (cell, currentClass) => {
             cell.classList.add(currentClass)
