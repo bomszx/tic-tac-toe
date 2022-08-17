@@ -32,9 +32,6 @@
     cursor: not-allowed;
 }
 
-
-
-
 .cell {
     width: var(--cell-size);
     height: var(--cell-size);
@@ -132,6 +129,7 @@
 .winning-message {
     display: none;
     position: fixed;
+
     top: 0;
     left: 0;
     right: 0;
@@ -161,4 +159,5 @@
 
 .winning-message.show {
     display: flex;
+
 }
