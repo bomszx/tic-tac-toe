@@ -1,13 +1,11 @@
 
-// IIFE 
 const gameBoard = (() => {
-    const board = ['x', 'o']
+    const cellElements = document.querySelectorAll('[data-cell]')
 
-    return {board}
+    cellElements.forEach(cell => {
+        cell.addEventListener('click', function(e) {
+            console.log(e, 'PUTANGINA MO')
+        })
+    })
+    return {cellElements}
 })();
-
-const displayControler = (() => {
-    gameBoard.board.forEach((tile => console.log(tile)))
-})
-
-displayControler();
