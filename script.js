@@ -1,25 +1,37 @@
+/**
+ * need to create a player object which gives us the mark of the player
+ * need a function that will take player, id of the cell which was clicked and probably a color or anything to distinguish between players
+ * need a function that toggles who's turn it is to place their mark
+ */
+
 // gameboard module
 const board = (() => {
-    const gameBoard = ["xeeee", "2", "", "5", "x", "", "", "", "o"];
+    const gameBoard = ["x", "o", "x", "", "", "", "", "", ""];
     const cells = document.querySelectorAll('.cell')
 
-    const render = () => {
-        for(let i = 0; i < cells.length; i++) {
-            cells[i].innerText = gameBoard[i]
-        }       
+    // click handler defines the cell that is clicked
+    const handleClick = (e) => {
+        const x = Player('x')
+        const o = Player('o')
+        const clickedCell = e.target.id;
+        cells[clickedCell].innerText = x.marker;
     }
-    return {gameBoard, cells, render}
+    
+    cells.forEach(cell => cell.addEventListener('click', handleClick))
+    
+
+
+    return {gameBoard, handleClick}
+})();
+
+const displayController = (() => {
+
 })();
 
 // player factory
-const Player = (name, marker) => {
-    const writeMark = () => {
-        console.log(`my name is mark and this is my mark ${marker}`);eeeeeeeeeeeeeeeee
-    }
+const Player = (marker) => {
+    this.marker = marker
 
-    return {name, marker, writeMark}
+    return {marker}
 }
 
-/*
-Set up your HTML and write a JavaScript function that will render the contents of the gameboard array to the webpage (for now you can just manually fill in the array with "X"s and "O"s) 
-*/
