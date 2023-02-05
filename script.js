@@ -1,37 +1,23 @@
-/**
- * need to create a player object which gives us the mark of the player
- * need a function that will take player, id of the cell which was clicked and probably a color or anything to distinguish between players
- * need a function that toggles who's turn it is to place their mark
+/*
+ * create a gameBoard 3x3
+ * addEventListeners to each cell of the board
+ *  - will call a fn that will update the board with the marker
+ * need player factory for player objects (x, o) 
+ */
+/*
+ * You do, but generally not directly. When the DOM board is clicked, you might be able to tell which cell was clicked. And you might tell some sort of "game manager thing" what the index of the clicked cell was. And that "game manager thing"? It might ask the gameBoard array "hey, is this index able to be set to this marker?" And that gameBoard array might respond if it can or not.
+
+Developing this one is sort of "orchestrating the conversation" between the various bits.
+
+Great question! If you find you're getting a little stuck? I might suggest checking in the threads for either this channel or the other JS one. There are a lot of great threads about the TicTacToe project, from "how to structure it" to "how to check for a win" to "factories or classes?"
  */
 
-// gameboard module
-const board = (() => {
-    const gameBoard = ["x", "o", "x", "", "", "", "", "", ""];
-    const cells = document.querySelectorAll('.cell')
-
-    // click handler defines the cell that is clicked
-    const handleClick = (e) => {
-        const x = Player('x')
-        const o = Player('o')
-        const clickedCell = e.target.id;
-        cells[clickedCell].innerText = x.marker;
-    }
-    
-    cells.forEach(cell => cell.addEventListener('click', handleClick))
-    
-
-
-    return {gameBoard, handleClick}
+const gameBoard = (() => {
+    const board = ['X', 'O', 'O', 'X', 'O', 'X', 'X', 'O', 'O'];
 })();
 
-const displayController = (() => {
+const displayController = (() => {}()
 
-})();
-
-// player factory
-const Player = (marker) => {
-    this.marker = marker
-
-    return {marker}
+const Player = (name, marker) => {
+  
 }
-
