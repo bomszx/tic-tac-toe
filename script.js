@@ -12,12 +12,55 @@ Developing this one is sort of "orchestrating the conversation" between the vari
 Great question! If you find you're getting a little stuck? I might suggest checking in the threads for either this channel or the other JS one. There are a lot of great threads about the TicTacToe project, from "how to structure it" to "how to check for a win" to "factories or classes?"
  */
 
+// _ for private methods and properties
+
+/**
+ * 
+ * x = currentPlayer, place their mark
+ *  - if current cell is not empty they can place their mark
+ *  - check for win 3 in a row or a tie if no more empty cells
+ * 
+ * o = currentPlayer, place their mark
+ *  - if current cell is not empty they can place their mark
+ *  - check for win 3 in a row or a tie if no more empty cells
+ * 
+ *  pop up to restart game
+ */
+
+/*
+  
+*/
+
 const gameBoard = (() => {
-    const board = ['X', 'O', 'O', 'X', 'O', 'X', 'X', 'O', 'O'];
+  // tie this array to the html board
+    const _board = ["x", "o", "o", "o", "x", "x", "o", "x", "x"];
+
+    const getBoard = () => {
+      return {
+        ..._board
+      };
+    }
+
+    return {
+      getBoard
+    }
 })();
 
-const displayController = (() => {}()
-
 const Player = (name, marker) => {
-  
+  this.name = name;
+  this.marker = marker;
+
+  return {
+    name, marker
+  }
 }
+
+const game = (() => {
+  const player1 = Player("x", "x")
+  const player2 = Player("o", "o")
+
+  return {
+    player1,
+    player2
+  }
+})()
