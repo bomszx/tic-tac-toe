@@ -32,20 +32,32 @@ Great question! If you find you're getting a little stuck? I might suggest check
 */
 
 const gameBoard = (() => {
-  // tie this array to the html board
-    const _board = ["x", "o", "o", "o", "x", "x", "o", "x", "x"];
+  // tie this array to the html board - this _board we can use to check for winning combs, and state (if a cell has an marker on it or not)
+  const _board = ["x", "1", "o", "o", "x", "x", "o", "x", "x"];
 
-    const getBoard = () => {
-      return {
-        ..._board
-      };
+  // display our _board arr to the DOM/HTML
+  const displayBoard = () => {
+    const cells = document.querySelectorAll(".cell");
+
+    for(let i = 0; i < cells.length; i++) {
+      cells[i].innerText = _board[i];
+      console.log(cells[i].id)
     }
+  }
 
+  const getBoard = () => {
     return {
-      getBoard
-    }
+      ..._board
+    };
+  }
+
+  return {
+    getBoard,
+    displayBoard
+  }
 })();
 
+// player factory
 const Player = (name, marker) => {
   this.name = name;
   this.marker = marker;
@@ -55,6 +67,7 @@ const Player = (name, marker) => {
   }
 }
 
+// this module controls the flow of the game
 const game = (() => {
   const player1 = Player("x", "x")
   const player2 = Player("o", "o")
