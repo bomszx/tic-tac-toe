@@ -15,55 +15,72 @@ Great question! If you find you're getting a little stuck? I might suggest check
 // _ for private methods and properties
 
 /**
- * 
- * x = currentPlayer, place their mark
- *  - if current cell is not empty they can place their mark
- *  - check for win 3 in a row or a tie if no more empty cells
- * 
- * o = currentPlayer, place their mark
- *  - if current cell is not empty they can place their mark
- *  - check for win 3 in a row or a tie if no more empty cells
- * 
- *  pop up to restart game
- */
+    - PUTANGINANG INANG TIC-TAC-TOE
 
-/*
+  - initially, choose which marker we want,
+    - set the choice as the currentPlayer variable
   
-*/
+  - make our board clickable..
+    - with each click want to return the index of the cell and the current marker for that cell
+      - we need this so we can use our _board array for the winning combination
 
-const gameBoard = (() => {
+    - check if clicked cell is empty
+    - after a click, switch players
+  */
+ 
+
+  const gameBoard = (() => {
   // tie this array to the html board - this _board we can use to check for winning combs, and state (if a cell has an marker on it or not)
-  const _board = ["x", "1", "o", "o", "x", "x", "o", "x", "x"];
+  const _board = ["x", "o", "x", "x", "o", "x", "x", "o", "x"];
+
+  const cells = document.querySelectorAll(".cell"); // DOM Element
 
   // display our _board arr to the DOM/HTML
-  const displayBoard = () => {
-    const cells = document.querySelectorAll(".cell");
-
+  const renderBoard = () => {
     for(let i = 0; i < cells.length; i++) {
       cells[i].innerText = _board[i];
-      console.log(cells[i].id)
     }
   }
 
+  // returns a copy of our _board
   const getBoard = () => {
     return {
       ..._board
     };
   }
 
+
+  const setCell = (e) => {
+
+    e.target.innerText = game.player1.marker
+  }
+
+  cells.forEach(cell => cell.addEventListener('click', setCell));
+
+
+  const checkForWin = () => {
+
+  }
+
+  const resetBoard = () => {
+
+  }
+
   return {
     getBoard,
-    displayBoard
+    renderBoard,
+    setCell,
+  // returning cell so I can use it to add eventlisteners from the game module
   }
 })();
 
 // player factory
-const Player = (name, marker) => {
+const Player = (name,marker) => {
   this.name = name;
   this.marker = marker;
 
   return {
-    name, marker
+    name, marker,
   }
 }
 
@@ -71,9 +88,13 @@ const Player = (name, marker) => {
 const game = (() => {
   const player1 = Player("x", "x")
   const player2 = Player("o", "o")
+  let currentPlayer = player1;
+
 
   return {
     player1,
     player2
+
   }
+
 })()
