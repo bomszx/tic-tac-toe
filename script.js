@@ -42,24 +42,36 @@ Great question! If you find you're getting a little stuck? I might suggest check
     
   */
 
+const Player = (name, marker) => {
+  this.name = name;
+  this.marker = marker;
+
+  const placeMarker = (index, player) => {
+    console.log(index, player.marker)
+  }
+
+  return {
+    name, marker, placeMarker
+  }
+}
+
 const gameBoard = (() => {
   let board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
   const cells = document.querySelectorAll(".cell");
+  const currentPlayer = Player("test", "T")
+
+  const getCell = () => {
+    cells.forEach(cell => cell.addEventListener('click', (e) => {
+      currentPlayer.placeMarker(e.target.id, currentPlayer)
+    }))
+  }
 
   return {
     board,
-    cells
+    cells,
+    getCell
   }
 })()
-
-const Player = (name, marker) => {
-  const move = (index, name, marker) => {
-    console.log(index, name, marker)
-  }
-  return {
-    move
-  }
-}
 
 const displayController = (() => {
   const render = () => {
@@ -71,5 +83,6 @@ const displayController = (() => {
     render
   }
 })()
+gameBoard.getCell()
 displayController.render()
 
