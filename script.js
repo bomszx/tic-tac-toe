@@ -47,7 +47,7 @@ const Player = (name, marker) => {
   this.marker = marker;
 
   const placeMarker = (index, player) => {
-    console.log(index, player.marker)
+    index.target.innerText = player.marker
   }
 
   return {
@@ -56,20 +56,49 @@ const Player = (name, marker) => {
 }
 
 const gameBoard = (() => {
-  let board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  let board = ["", "", "", "", "", "", "", "", ""];
   const cells = document.querySelectorAll(".cell");
-  const currentPlayer = Player("test", "T")
+  const testPlayer1 = Player("test1", "one")
+  const testPlayer2 = Player("test2", "two")
+  let currentPlayer = testPlayer1
+
+  const setBoard = (index, mark) => {
+    board[index] = mark
+    console.log(board)
+  }
+
+  const switchPlayer = () => {
+    if(currentPlayer === testPlayer1) {
+
+      currentPlayer = testPlayer2
+    } else {
+      currentPlayer = testPlayer1
+      console.log("p1")
+    }
+  }
 
   const getCell = () => {
     cells.forEach(cell => cell.addEventListener('click', (e) => {
-      currentPlayer.placeMarker(e.target.id, currentPlayer)
+      
+      currentPlayer.placeMarker(e, currentPlayer)
+      let cellId = e.target.id
+      let mark = currentPlayer
+      setBoard(cellId, mark)
+      switchPlayer()
     }))
+  }
+
+  const resetBoard = () => {
+    gameBoard.board = ["", "", "", "", "", "", "", "", ""]
+    displayController.render()
   }
 
   return {
     board,
     cells,
-    getCell
+    getCell,
+    resetBoard,
+    currentPlayer
   }
 })()
 
