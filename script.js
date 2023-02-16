@@ -10,7 +10,7 @@ const gameBoard = (() => {
   let _board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
   const x = Player('x');
   const o = Player('o');
-  let currentPlayer = o;
+  let currentPlayer = x;
   const cells = Array.from(document.getElementsByClassName(('cell')));
   
   const getBoard = () => {
@@ -19,16 +19,18 @@ const gameBoard = (() => {
 
   // this bad boy handles the click on the DOM which changes the _board
   const handeClick = (cell, i, player) => {
-    if(currentPlayer == o) {
-      currentPlayer = x
-    } else {
-      currentPlayer = o
+    if(cell.target.innerText == "") {
+      _board[i] = currentPlayer.mark;
+      _switchPlayers()
     }
-    _board[i] = currentPlayer.mark;
+  } 
+
+  const _switchPlayers = () => {
+    currentPlayer == o ? currentPlayer = x : currentPlayer = o;
   }
 
   cells.forEach(cell => cell.addEventListener('click', (cell) => {
-    gameBoard.handeClick(cell, cell.target.id, o)
+    gameBoard.handeClick(cell, cell.target.id, currentPlayer)
     displayController.render()
 
   }))
@@ -42,8 +44,7 @@ const gameBoard = (() => {
 
 const displayController = (() =>{
   const render = () => {
-    const cells = Array.from(document.getElementsByClassName(('cell')));
-    cells.forEach((cell, i) => {
+    gameBoard.cells.forEach((cell, i) => {
       cell.innerText = gameBoard.getBoard()[i];
     })
 
