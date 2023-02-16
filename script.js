@@ -7,9 +7,10 @@ const Player = (mark) => {
 }
 
 const gameBoard = (() => {
-  let _board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-  const x = Player('x')
-  const o = Player('o')
+  let _board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
+  const x = Player('x');
+  const o = Player('o');
+  let currentPlayer = o;
   const cells = Array.from(document.getElementsByClassName(('cell')));
   
   const getBoard = () => {
@@ -18,7 +19,12 @@ const gameBoard = (() => {
 
   // this bad boy handles the click on the DOM which changes the _board
   const handeClick = (cell, i, player) => {
-    return _board[i] = player.mark
+    if(currentPlayer == o) {
+      currentPlayer = x
+    } else {
+      currentPlayer = o
+    }
+    _board[i] = currentPlayer.mark;
   }
 
   cells.forEach(cell => cell.addEventListener('click', (cell) => {
