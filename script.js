@@ -11,6 +11,7 @@ const gameBoard = (() => {
   const x = Player('x');
   const o = Player('o');
   let currentPlayer = x;
+  let round = 0
   const cells = Array.from(document.getElementsByClassName(('cell')));
   
   const getBoard = () => {
@@ -29,9 +30,18 @@ const gameBoard = (() => {
       }
    } 
 
+
+  const _checkForDraw = () => {
+    if(round == 9) {
+      return true
+    }
+  }
+
   const _placeMark = (cell, i) => {
     if(cell.target.innerText == "")
     _board[i] = currentPlayer.mark
+    round++
+    return round
   }
 
   const _switchPlayers = () => {
@@ -51,17 +61,10 @@ const gameBoard = (() => {
     ]
 
     return winningCombinations.some(combination => {
-      return combination.every(index => {
-        return _board[index] === player.mark
+      return combination.every(index => _board[index] === player.mark)
       })
-    })
-  }
-
-  const _checkForDraw = () => {
-    return cells.every(cell => {
-      return cell.innerText === "x" || cell.innerText === "o"
-    })
-  }
+    }
+  
 
 
   const _endGame = (draw) => {
