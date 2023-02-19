@@ -21,7 +21,9 @@ const gameBoard = (() => {
   const handeClick = (cell, i, player) => {
       _placeMark(cell, i)
       if(_checkForWin(player)) {
-        _endGame()
+        _endGame(false)
+      } else if(_checkForDraw()) {
+        _endGame(true)
       } else {
         _switchPlayers()
       }
@@ -48,26 +50,31 @@ const gameBoard = (() => {
       [2,4,6]
     ]
 
-    let win = winningCombinations
-    .some(combination => combination
-      .every(index => _board[index] === player.mark))
-
-      return win;
+    return winningCombinations.some(combination => {
+      return combination.every(index => {
+        return _board[index] === player.mark
+      })
+    })
   }
 
   const _checkForDraw = () => {
-    let draw = cells.every(cell => cell.innerText == "x" || cell.innerText == "o")
-
-    return draw
-
+    return cells.every(cell => {
+      return cell.innerText === "x" || cell.innerText === "o"
+    })
   }
 
-  const _endGame = () => {
+
+  const _endGame = (draw) => {
     const board = document.querySelector('.gameBoard')
     const h2 = document.querySelector('.gameMessage')
 
-    h2.innerText = `${currentPlayer.mark} won!`
-    board.style.display = "none"
+    if(draw) {
+      h2.innerText = "It's a draw"
+      board.style.display = "none"
+    } else {
+      h2.innerText = `${currentPlayer.mark} won!`
+      board.style.display = "none"
+    }
   }
 
   cells.forEach(cell => cell.addEventListener('click', (cell) => {
