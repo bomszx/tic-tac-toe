@@ -88,6 +88,14 @@ header {
     border-right: none;
 }
 
+#gameBoard .cell {
+    font-family: var(--font-ui);
+    text-align: center;
+    font-weight: 500;
+    font-size: 5rem;
+
+}
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
