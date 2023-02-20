@@ -9,15 +9,12 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-
     <div class="container">
         <header>
             <h1 class="header">Tic-Tac Toe</h1>
         </header>
         <div class="choose">
-            <div class="gameMessage">
-                <p>choose I guess..</p>
-            </div>                
+             
             <div class="players">
                 <div class="button" id="x">
                     <button>X</button>
@@ -41,13 +38,16 @@
         </div>
     </div>
 
-    <div class="modal" id="myModal">
-        <span class="closee">&times;</span>
-        <button class="button" id="resetButton">
-            Restart game
-        </button>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+    <!-- Modal content -->
+        <div class="modal-content">
+            <div class="gameMessage">
+                <p>choose I guess...</p>
+            </div>   
+            <button class="button" id="restartButton">Play again?</button>
+        </div>
     </div>
-
 </body>
 
 </html>

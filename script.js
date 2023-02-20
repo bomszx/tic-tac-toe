@@ -15,7 +15,7 @@ const gameBoard = (() => {
   const board = document.querySelector('.gameBoard')
   const h2 = document.querySelector('.gameMessage')
   const cells = Array.from(document.getElementsByClassName(('cell')));
-  const resetButton = document.getElementById('resetButton')
+  const resetButton = document.getElementById('restartButton')
     
   const getBoard = () => {
     return {..._board}
@@ -45,7 +45,6 @@ const gameBoard = (() => {
       _board[i] = currentPlayer.mark
       round++
     }
-
     return round
   }
 
@@ -73,10 +72,10 @@ const gameBoard = (() => {
   const _endGame = (draw) => {
     if(draw) {
       h2.innerText = "It's a draw"
-      board.style.display = "none"
+      _showModal()
     } else {
       h2.innerText = `${currentPlayer.mark} won!`
-      board.style.display = "none"
+      _showModal()
     }      
     round = 0;
   }
@@ -88,14 +87,17 @@ const gameBoard = (() => {
 
     // can change, since we're gonna be using a modal
     board.style.display = "grid"
-    h2.innerText = "choose I guess..."
+    modal.style.display = "none";
   }
 
   cells.forEach(cell => cell.addEventListener('click', (cell) => {
     gameBoard.handeClick(cell, cell.target.id, currentPlayer)
     displayController.render()
-
   }))
+
+  const _showModal = () => {
+    modal.style.display = "block";
+  }
 
   resetButton.addEventListener('click', _resetGame)
  
@@ -103,6 +105,7 @@ const gameBoard = (() => {
     getBoard,
     handeClick,
     cells,
+
   }
 })();
 
@@ -118,3 +121,24 @@ const displayController = (() =>{
     render
   }
 })()
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+// span.onclick = function() {
+//   modal.style.display = "none";
+// }
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
