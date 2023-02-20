@@ -2,11 +2,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: var(--font-ui)
 }
 :root {
     --white: white;
-    --web-ash: #F0F2F5
+    --web-ash: #F0F2F5;
+    --font-game: 'Sedgwick Ave', cursive;
+    --font-ui: 'Nunito', sans-serif;
 }
+
 
 header {
     justify-self: flex-start;
@@ -16,7 +20,7 @@ header {
     top: 0;
     position: fixed;
     width: 100vw;
-    box-shadow: 2px 4px 5px rgb(204, 203, 203);
+    box-shadow: 1px 2px 5px rgb(204, 204, 204);
 }
 
 .container {
