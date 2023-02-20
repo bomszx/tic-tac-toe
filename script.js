@@ -12,6 +12,7 @@ const gameBoard = (() => {
   const o = Player('o');
   let currentPlayer = x;
   let round = 0
+
   const cells = Array.from(document.getElementsByClassName(('cell')));
   
   const getBoard = () => {
@@ -29,7 +30,6 @@ const gameBoard = (() => {
         _switchPlayers()
       }
    } 
-
 
   const _checkForDraw = () => {
     if(round == 9) {
@@ -65,8 +65,6 @@ const gameBoard = (() => {
       })
     }
   
-
-
   const _endGame = (draw) => {
     const board = document.querySelector('.gameBoard')
     const h2 = document.querySelector('.gameMessage')
@@ -80,11 +78,23 @@ const gameBoard = (() => {
     }
   }
 
+  const _resetGame = () => {
+    // _board = ['','','','','','','','','']
+    console.log('reset')
+  }
+
   cells.forEach(cell => cell.addEventListener('click', (cell) => {
     gameBoard.handeClick(cell, cell.target.id, currentPlayer)
     displayController.render()
 
   }))
+
+  const resetButton = document.getElementById('resetButton')
+  
+  resetButton.addEventListener('click', _resetGame)
+
+
+  
 
   return {
     getBoard,
