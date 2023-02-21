@@ -23,6 +23,27 @@ header {
     box-shadow: 1px 2px 5px rgb(204, 204, 204);
 }
 
+.choose {
+    margin-bottom: 5rem;
+}
+
+.button {
+    padding: .5rem;
+    border-radius: 3px;
+    border: none;
+    width: auto;
+    font-size: 1.5rem;
+
+}
+
+#x {
+    background-color: #008cba;
+}
+
+#o {
+    background-color: #f44336;
+}
+
 .container {
     background-color: var(--web-ash);
     display: flex;
@@ -34,9 +55,11 @@ header {
 }
 
 .players {
+    margin-top: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 2rem;
 }
 
 .gameBoard {
@@ -49,7 +72,7 @@ header {
 .cell {
     /* background-color: rosybrown; */
     height: 120px;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 
 .gameBoard > :first-child {
@@ -124,10 +147,10 @@ header {
     border: 1px solid #888;
     border-radius: 4px;
     height: auto;
-    width: 10%; /* Could be more or less, depending on screen size */
+    width: 20%; /* Could be more or less, depending on screen size */
   }
 
   .gameMessage {
-    color: red;
+    color: #4caf50;
   }
 

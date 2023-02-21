@@ -16,6 +16,8 @@ const gameBoard = (() => {
   const h2 = document.querySelector('.gameMessage')
   const cells = Array.from(document.getElementsByClassName(('cell')));
   const resetButton = document.getElementById('restartButton')
+  const modal = document.getElementById("myModal");
+  const btn = document.getElementById("myBtn");
     
   const getBoard = () => {
     return {..._board}
@@ -23,16 +25,16 @@ const gameBoard = (() => {
 
   // this bad boy handles the click on the DOM which changes the _board
   const handeClick = (cell, i, player) => {
-      _placeMark(cell, i)
-      console.log(round)
-      if(_checkForWin(player)) {
-        _endGame(false)
-      } else if(_checkForDraw()) {
-        _endGame(true)
+    if(cell.target.innerText !== "") return
+      _placeMark(i, player)
+     if(_checkForWin(player)) {
+         _endGame(false)
+       } else if(_checkForDraw()) {
+         _endGame(true)
       } else {
         _switchPlayers()
       }
-   } 
+    }
 
   const _checkForDraw = () => {
     if(round == 9) {
@@ -40,12 +42,9 @@ const gameBoard = (() => {
     }
   }
 
-  const _placeMark = (cell, i) => {
-    if(cell.target.innerText === "") {
+  const _placeMark = (i, player) => {
       _board[i] = currentPlayer.mark
       round++
-    }
-    return round
   }
 
   const _switchPlayers = () => {
@@ -96,6 +95,18 @@ const gameBoard = (() => {
   }))
 
   const _showModal = () => {
+  // When the user clicks on <span> (x), close the modal
+  // span.onclick = function() {
+  //   modal.style.display = "none";
+  // }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
     modal.style.display = "block";
   }
 
@@ -122,23 +133,3 @@ const displayController = (() =>{
   }
 })()
 
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-// span.onclick = function() {
-//   modal.style.display = "none";
-// }
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
