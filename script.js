@@ -10,14 +10,13 @@ const gameBoard = (() => {
   let _board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
   const x = Player('x');
   const o = Player('o');
-  let currentPlayer = x;
+  let currentPlayer;
   let round = 0
   const board = document.querySelector('.gameBoard')
   const h2 = document.querySelector('.gameMessage')
   const cells = Array.from(document.getElementsByClassName(('cell')));
   const resetButton = document.getElementById('restartButton')
   const modal = document.getElementById("myModal");
-  const btn = document.getElementById("myBtn");
     
   const getBoard = () => {
     return {..._board}
@@ -25,8 +24,9 @@ const gameBoard = (() => {
 
   // this bad boy handles the click on the DOM which changes the _board
   const handeClick = (cell, i, player) => {
+    if(player == undefined) alert("Please pick a marker")
     if(cell.target.innerText !== "") return
-      _placeMark(i, player)
+      _placeMark(i)
      if(_checkForWin(player)) {
          _endGame(false)
        } else if(_checkForDraw()) {
@@ -42,7 +42,18 @@ const gameBoard = (() => {
     }
   }
 
-  const _placeMark = (i, player) => {
+  const _playerPicker = (e) => {
+    e.target.id == 'x' ? currentPlayer = x : currentPlayer = o;
+  }
+
+
+  const p1 = document.getElementById('x')
+  const p2 = document.getElementById('o')
+  p1.addEventListener('click', _playerPicker)
+  p2.addEventListener('click', _playerPicker)
+  
+
+  const _placeMark = (i) => {
       _board[i] = currentPlayer.mark
       round++
   }
@@ -95,12 +106,6 @@ const gameBoard = (() => {
   }))
 
   const _showModal = () => {
-  // When the user clicks on <span> (x), close the modal
-  // span.onclick = function() {
-  //   modal.style.display = "none";
-  // }
-
-  // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
@@ -132,4 +137,3 @@ const displayController = (() =>{
     render
   }
 })()
-

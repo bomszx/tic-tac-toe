@@ -7,3 +7,8 @@ understood the importance of careful planning and really understanding the input
 
 applied my understanding on how functions and callback functions work, I also was able to apply how to manipulate/create DOM elements using javascript
 
+How to play:
+    1. Pick a marker of your choice
+    2. Click anywhere on the board, goal is to create a 3 in-a-row combination
+    3. Enjoy!
+

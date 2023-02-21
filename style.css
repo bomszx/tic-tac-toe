@@ -38,10 +38,12 @@ header {
 
 #x {
     background-color: #008cba;
+    width: 4rem;
 }
 
 #o {
     background-color: #f44336;
+    width: 4rem;
 }
 
 .container {
