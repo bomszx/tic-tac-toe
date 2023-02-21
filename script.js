@@ -1,3 +1,4 @@
+// Player factory
 const Player = (mark) => {
   this.mark = mark
 
@@ -6,7 +7,10 @@ const Player = (mark) => {
   }
 }
 
+// Gameboard arr - contains the _board are which is what we display on the HTML, we pass a shallow copy of this arr to our functions with gameBoard.getBoard()
 const gameBoard = (() => {
+
+  // Variables for our functions
   let _board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
   const x = Player('x');
   const o = Player('o');
@@ -18,14 +22,15 @@ const gameBoard = (() => {
   const resetButton = document.getElementById('restartButton')
   const modal = document.getElementById("myModal");
     
+  // Destructured _board, creates a shallow copy
   const getBoard = () => {
     return {..._board}
   }
 
-  // this bad boy handles the click on the DOM which changes the _board
+  // This function handles the click event on the board - so every function in this is ran once the board is clicked
   const handeClick = (cell, i, player) => {
-    if(player == undefined) alert("Please pick a marker")
-    if(cell.target.innerText !== "") return
+    if(player == undefined) alert("Please pick a marker") // alert if there is no marker chosen
+    if(cell.target.innerText !== "") return // stops code if the clicked cell is occupied
       _placeMark(i)
      if(_checkForWin(player)) {
          _endGame(false)
@@ -36,12 +41,14 @@ const gameBoard = (() => {
       }
     }
 
+  // round here is a count variable which indicates a draw, each click increments round, if comes up to 9 and there's still no winningComb then it's a draw
   const _checkForDraw = () => {
     if(round == 9) {
       return true
     }
   }
 
+  // fn for picking a marker
   const _playerPicker = (e) => {
     e.target.id == 'x' ? currentPlayer = x : currentPlayer = o;
   }
@@ -58,6 +65,7 @@ const gameBoard = (() => {
       round++
   }
 
+  // switch turns/players
   const _switchPlayers = () => {
     currentPlayer == o ? currentPlayer = x : currentPlayer = o;
   }
@@ -74,6 +82,7 @@ const gameBoard = (() => {
       [2,4,6]
     ]
 
+    // we're checking if some of our winning combinations elements, like [0,1,2] has our player mark in each of its index
     return winningCombinations.some(combination => {
       return combination.every(index => _board[index] === player.mark)
       })
@@ -95,13 +104,15 @@ const gameBoard = (() => {
     console.log(_board)
     displayController.render()
 
-    // can change, since we're gonna be using a modal
     board.style.display = "grid"
     modal.style.display = "none";
   }
 
+  // used a call back to call handleClick on each cell
   cells.forEach(cell => cell.addEventListener('click', (cell) => {
     gameBoard.handeClick(cell, cell.target.id, currentPlayer)
+
+    // so each click, on the _board will then be updating our _board arr then will be displayed by render here
     displayController.render()
   }))
 
@@ -125,6 +136,7 @@ const gameBoard = (() => {
   }
 })();
 
+// render here displays our _board arr to the html
 const displayController = (() =>{
 
   const render = () => {
